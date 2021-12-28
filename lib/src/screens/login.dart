@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter/services.dart';
 import 'dart:async';
 import 'dart:ui';
@@ -162,41 +163,41 @@ class _Login extends State<Login> with TickerProviderStateMixin {
                     ),
                     Expanded(
                       flex: 7,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          component1(Icons.account_circle_outlined,
-                              'Usuario...', false, false),
-                          component1(
-                              Icons.email_outlined, 'Email...', false, true),
-                          component1(
-                              Icons.lock_outline, 'Password...', true, false),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              component2(
-                                'INGRESAR',
-                                2.58,
-                                () {
-                                  HapticFeedback.lightImpact();
-                                  Fluttertoast.showToast(
-                                      msg: 'Boton de ingresar presionado');
-                                },
-                              ),
-                              SizedBox(width: size.width / 20),
-                              component2(
-                                'Olvide mi password!',
-                                2.58,
-                                () {
-                                  HapticFeedback.lightImpact();
-                                  Fluttertoast.showToast(
-                                      msg:
-                                          'Boton de olvide mi Pass presionado');
-                                },
-                              ),
-                            ],
-                          ),
-                        ],
+                      child: Form(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            component1(Icons.account_circle_outlined,
+                                'Usuario...', false, false),
+                            component1(
+                                Icons.lock_outline, 'Password...', true, false),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                component2(
+                                  'INGRESAR',
+                                  2.58,
+                                  () {
+                                    HapticFeedback.lightImpact();
+                                    Fluttertoast.showToast(
+                                        msg: 'Boton de ingresar presionado');
+                                  },
+                                ),
+                                SizedBox(width: size.width / 20),
+                                component2(
+                                  'Olvide mi password!',
+                                  2.58,
+                                  () {
+                                    HapticFeedback.lightImpact();
+                                    Fluttertoast.showToast(
+                                        msg:
+                                            'Boton de olvide mi Pass presionado');
+                                  },
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                     Expanded(
@@ -247,7 +248,7 @@ class _Login extends State<Login> with TickerProviderStateMixin {
             color: Colors.white.withOpacity(.05),
             borderRadius: BorderRadius.circular(15),
           ),
-          child: TextField(
+          child: TextFormField(
             style: TextStyle(color: Colors.white.withOpacity(.8)),
             cursorColor: Colors.white,
             obscureText: isPassword,
@@ -261,9 +262,13 @@ class _Login extends State<Login> with TickerProviderStateMixin {
               border: InputBorder.none,
               hintMaxLines: 1,
               hintText: hintText,
-              hintStyle:
-                  TextStyle(fontSize: 14, color: Colors.white.withOpacity(.5)),
+              hintStyle: TextStyle(fontSize: 14, color: Colors.white),
             ),
+            validator: (value) {
+              return (value != null && value.length >= 6)
+                  ? null
+                  : "La Password no es valida";
+            },
           ),
         ),
       ),
@@ -290,7 +295,7 @@ class _Login extends State<Login> with TickerProviderStateMixin {
             ),
             child: Text(
               string,
-              style: TextStyle(color: Colors.white.withOpacity(.8)),
+              style: TextStyle(color: Colors.white),
             ),
           ),
         ),

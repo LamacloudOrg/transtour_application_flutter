@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:transtour_application/src/screens/home_screen.dart';
-// import 'package:transtour_application/src/screens/login_copy.dart';
 import 'package:transtour_application/src/screens/login.dart';
 
 void main() {
