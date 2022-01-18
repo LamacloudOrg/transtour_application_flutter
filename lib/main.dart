@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:transtour_application/src/screens/home_screen.dart';
 import 'package:transtour_application/src/screens/login.dart';
+import 'package:transtour_application/src/screens/travel.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,10 +16,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Transtour App',
-        initialRoute: 'login',
+        initialRoute: 'travel',
         routes: {
           'home_screen': (_) => HomeScreen(),
           'login': (_) => Login(),
+          'travel': (_) => Travel()
         });
 
     SystemChrome.setSystemUIOverlayStyle(
