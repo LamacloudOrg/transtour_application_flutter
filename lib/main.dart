@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:transtour_application/src/screens/home_screen.dart';
-import 'package:transtour_application/src/screens/login.dart';
-import 'package:transtour_application/src/screens/travel.dart';
+import 'package:transtour_application/src/screens/home/home_screen.dart';
+import 'package:transtour_application/src/screens/login/login.dart';
+import 'package:transtour_application/src/screens/signature/signature_page.dart';
+import 'package:transtour_application/src/screens/travel/travel.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,11 +17,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Transtour App',
-        initialRoute: 'travel',
+        initialRoute: 'signature',
         routes: {
           'home_screen': (_) => HomeScreen(),
           'login': (_) => Login(),
-          'travel': (_) => Travel()
+          'travel': (_) => Travel(),
+          'signature': (_) => SignaturePage()
         });
 
     SystemChrome.setSystemUIOverlayStyle(

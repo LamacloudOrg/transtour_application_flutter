@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:transtour_application/src/widget/background.dart';
-import 'package:transtour_application/src/widget/background_page.dart';
 import 'package:transtour_application/src/widget/forms/custom_input_field.dart';
 
 class Travel extends StatefulWidget {
@@ -19,10 +17,10 @@ class _TravelState extends State<Travel> {
           'VIAJE ACTUAL',
           style: TextStyle(color: Colors.white, fontSize: 22),
         ),
-        automaticallyImplyLeading: true, // remove back button in appbar.
+        automaticallyImplyLeading: false, // remove back button in appbar.
       ),
       body: Container(
-        color: Color(0xff202333),
+        color: Colors.white70,
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -69,7 +67,7 @@ class _TravelState extends State<Travel> {
                     icon: Icons.local_parking_rounded),
                 SizedBox(height: 10),
                 CustomInputField(
-                    labelText: 'Horas',
+                    labelText: 'Horas Espera',
                     hintText: '13:45',
                     icon: Icons.av_timer_outlined),
                 SizedBox(height: 10),
