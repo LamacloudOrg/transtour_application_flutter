@@ -191,13 +191,17 @@ class _Login extends State<Login> with TickerProviderStateMixin {
                                 component2(
                                   'Olvide mi password!',
                                   2.58,
-                                  () {
+                                  () async {
                                     HapticFeedback.lightImpact();
 
                                     var authentication = Authentication(
                                         dni: int.parse('34404216'),
                                         password: '1234');
-                                    authProvider.authenticate(authentication);
+                                    await authProvider
+                                        .authenticate(authentication);
+
+                                    Navigator.pushReplacementNamed(
+                                        context, "home_screen");
                                   },
                                 ),
                               ],

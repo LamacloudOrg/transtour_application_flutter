@@ -29,8 +29,8 @@ class Travel {
         destiny = json['destiny'],
         obsevation = json['obsevation'],
         toll = double.tryParse(json['toll']) ?? 0.0,
-        parking = double.parse(json['parking']) ?? 0.0,
-        waitingTime = double.parse(json['withiTime']) ?? 0.0;
+        parking = double.parse(json['parking']),
+        waitingTime = double.parse(json['withiTime']);
 
     Map<String, dynamic> toJson() => {
       'orderNumber': orderNumber,

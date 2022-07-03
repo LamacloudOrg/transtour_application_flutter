@@ -1,6 +1,12 @@
 import 'dart:convert';
+import 'dart:io';
+import 'package:dio/adapter.dart';
+import 'package:dio/dio.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:http/http.dart' as http;
+// ignore: unused_import
+import 'package:path_provider/path_provider.dart';
+import 'package:http/io_client.dart';
 import 'package:transtour_application/src/model/authentication_model.dart';
 import 'package:transtour_application/src/model/travel_taxes.dart';
 
@@ -8,51 +14,54 @@ class HttpService extends ChangeNotifier {
   final String BASE_URL = 'https://transtour.com.ar:8080/api';
   bool isAuthenticated = false;
   Map<String, String> headers = {};
+  late Dio dio;
 
   HttpService() {
     headers.putIfAbsent('Content-type', () => 'application/json');
+    dio = Dio();
+
+    (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+        (HttpClient client) {
+      client.badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+      return client;
+    };
   }
 
   Future<void> update(TravelTaxes travel) async {
-    var url = Uri.http(BASE_URL, '/travel/v1/updateTaxes');
+    // var url = Uri.https(BASE_URL, '/travel/v1/updateTaxes');
 
-    var response = await http.post(
-      url,
-      headers: headers,
-      body: travel,
-    );
+    var response =
+        await dio.post(BASE_URL + '/travel/v1/updateTaxes', data: travel);
 
     if (response.statusCode == 401 && response.statusCode == 403) {
       isAuthenticated = false;
       notifyListeners();
     }
 
-    var decodedResponse = jsonDecode(utf8.decode(response.bodyBytes)) as Map;
+    var decodedResponse = jsonDecode(utf8.decode(response.data)) as Map;
     print(decodedResponse);
   }
 
   Future<void> authenticate(Authentication authentication) async {
-    var client = http.Client();
     try {
-      var url = Uri.parse(BASE_URL + '/service-user/v1/user/oauth/token');
+      //var url = Uri.https(BASE_URL, '/service-user/v1/user/oauth/token');
 
-      var response = await client.post(
-        url,
+      var response = await dio.post(
+        BASE_URL + '/service-user/v1/user/oauth/token',
         // headers: headers,
-        body: json.encode(authentication),
+        data: json.encode(authentication),
       );
 
-      print(response.statusCode.toString());
-      print(response.body.toString());
-
-      if (response.statusCode >= 200 && response.statusCode < 300) {
+      var statusCode = response.statusCode ?? 0;
+      if (statusCode >= 200 && statusCode < 300) {
         isAuthenticated = true;
         notifyListeners();
       }
     } catch (e) {
       print(e.toString());
     } finally {
-      client.close();
+      //client.close();
     }
   }
 }
