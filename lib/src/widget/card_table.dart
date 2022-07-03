@@ -16,7 +16,7 @@ class CardTable extends StatelessWidget {
               color: Colors.cyan, icon: Icons.car_rental, text: 'Viaje actual'),
         ]),
         TableRow(children: [
-          _SigleCard(color: Colors.green, icon: Icons.shop, text: 'Calendario'),
+          _SigleCard(color: Colors.green, icon: Icons.shop, text: 'Vouchers'),
           _SigleCard(
               color: Colors.purpleAccent,
               icon: Icons.cloud,

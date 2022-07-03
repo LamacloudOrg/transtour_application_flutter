@@ -25,9 +25,9 @@ class CustomInputField extends StatelessWidget {
                   icon,
                   color: Colors.cyan,
                 ),
-          floatingLabelStyle: TextStyle(color: Colors.white),
+          floatingLabelStyle: TextStyle(color: Colors.pinkAccent),
           enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.white),
+              borderSide: BorderSide(color: Colors.white70),
               borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(10),
                   topRight: Radius.circular(10))),
