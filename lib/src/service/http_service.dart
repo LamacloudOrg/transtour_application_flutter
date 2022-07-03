@@ -2,10 +2,9 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/widgets.dart';
 import 'package:transtour_application/src/model/authentication.dart';
 
-class HttpService extends ChangeNotifier {
+class HttpService {
   final String BASE_URL = 'https://transtour.com.ar:8080/api';
   bool isAuthenticated = false;
   Map<String, String> headers = {};
