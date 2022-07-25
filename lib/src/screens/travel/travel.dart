@@ -9,6 +9,12 @@ class Travel extends StatefulWidget {
 }
 
 class _TravelState extends State<Travel> {
+  int _selectedIndex = 0;
+
+  void _onItemTapped(int index) {
+    Navigator.pushNamed(context, "signature");
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -84,25 +90,21 @@ class _TravelState extends State<Travel> {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-          // showSelectedLabels: true,
-          // showUnselectedLabels: true,
-          selectedItemColor: Colors.white,
-          backgroundColor: Color.fromRGBO(55, 57, 84, 1),
-          unselectedItemColor: Colors.white,
-          currentIndex: 0,
-          items: [
-            BottomNavigationBarItem(
-                icon: Icon(Icons.play_arrow), label: 'INICIAR VIAJE'),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.stop), label: 'FINALIZAR VIAJE'),
-            BottomNavigationBarItem(icon: Icon(Icons.create), label: 'FIRMAR'),
-          ]
-          /*
-        onTap: (int currentIndex) => {
-          if (currentIndex != valPositionalShared)
-            {goToFunction(currentIndex, context)}
-        },*/
-          ),
+        // showSelectedLabels: true,
+        // showUnselectedLabels: true,
+        selectedItemColor: Colors.white,
+        backgroundColor: Color.fromRGBO(55, 57, 84, 1),
+        unselectedItemColor: Colors.white,
+        currentIndex: _selectedIndex,
+        items: const [
+          BottomNavigationBarItem(
+              icon: Icon(Icons.play_arrow), label: 'INICIAR VIAJE'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.stop), label: 'FINALIZAR VIAJE'),
+          BottomNavigationBarItem(icon: Icon(Icons.create), label: 'FIRMAR'),
+        ],
+        onTap: _onItemTapped,
+      ),
     );
   }
 }
