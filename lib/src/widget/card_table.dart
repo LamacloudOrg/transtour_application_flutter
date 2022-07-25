@@ -97,7 +97,7 @@ class _SigleCard extends StatelessWidget {
           ],
         ),
         voidCallback: () {
-          Navigator.pushReplacementNamed(context, this.action);
+          Navigator.pushNamed(context, this.action);
         });
   }
 }
