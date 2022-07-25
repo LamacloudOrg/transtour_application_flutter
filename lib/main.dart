@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Transtour App',
-        initialRoute: 'signature',
+        initialRoute: 'login',
         routes: {
           'home_screen': (_) => HomeScreen(),
           'login': (_) => Login(),

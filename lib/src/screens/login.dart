@@ -4,6 +4,8 @@ import 'package:flutter/services.dart';
 import 'dart:async';
 import 'dart:ui';
 import 'package:fluttertoast/fluttertoast.dart';
+// import 'package:transtour_application/src/model/authentication_model.dart';
+import 'package:transtour_application/src/service/http_service.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -99,6 +101,8 @@ class _Login extends State<Login> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    HttpService authProvider = Provider.of(context, listen: false);
+
     return Scaffold(
       backgroundColor: Color(0xff2E305F),
       body: ScrollConfiguration(
@@ -178,7 +182,6 @@ class _Login extends State<Login> with TickerProviderStateMixin {
                                   'INGRESAR',
                                   2.58,
                                   () {
-                                    HapticFeedback.lightImpact();
                                     Navigator.pushReplacementNamed(
                                         context, "home_screen");
                                   },
@@ -187,11 +190,15 @@ class _Login extends State<Login> with TickerProviderStateMixin {
                                 component2(
                                   'Olvide mi password!',
                                   2.58,
-                                  () {
+                                  () async {
                                     HapticFeedback.lightImpact();
-                                    Fluttertoast.showToast(
-                                        msg:
-                                            'Boton de olvide mi Pass presionado');
+/*
+                                    var authentication = Authentication(
+                                        dni: int.parse('34404216'),
+                                        password: '1234');
+                                    await authProvider
+                                        .authenticate(authentication);
+*/
                                   },
                                 ),
                               ],
