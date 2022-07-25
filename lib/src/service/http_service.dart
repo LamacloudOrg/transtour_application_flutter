@@ -23,7 +23,7 @@ class HttpService {
   }
 
   Future<void> authenticate(Authentication authentication) async {
-    try {
+
       var response = await dio.post(
         BASE_URL + '/service-user/v1/user/oauth/token',
         // headers: headers,
@@ -31,11 +31,9 @@ class HttpService {
       );
 
       var statusCode = response.statusCode ?? 0;
-      // TODO  retorna ok o error.
-    } catch (e) {
-      print(e.toString());
-    } finally {
-      //client.close();
-    }
+      
+      if (statusCode >= 200 && statusCode <300 ){
+        
+      }
   }
 }
