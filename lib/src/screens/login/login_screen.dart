@@ -1,16 +1,21 @@
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:flutter/services.dart';
 import 'dart:async';
 import 'dart:ui';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:provider/provider.dart';
+import 'package:transtour_application/src/model/authentication.dart';
 
-class Login extends StatefulWidget {
+import '../../service/autentication_service.dart';
+
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({Key? key}) : super(key: key);
+
   @override
   _Login createState() => _Login();
 }
 
-class _Login extends State<Login> with TickerProviderStateMixin {
+class _Login extends State<LoginScreen> with TickerProviderStateMixin {
   late AnimationController controller1;
   late AnimationController controller2;
   late Animation<double> animation1;
@@ -98,7 +103,9 @@ class _Login extends State<Login> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    final service = Provider.of<AuthenticationService>(context, listen: false);
     Size size = MediaQuery.of(context).size;
+
     return Scaffold(
       backgroundColor: Color(0xff2E305F),
       body: ScrollConfiguration(
@@ -177,10 +184,17 @@ class _Login extends State<Login> with TickerProviderStateMixin {
                                 component2(
                                   'INGRESAR',
                                   2.58,
-                                  () {
+                                  () async {
                                     HapticFeedback.lightImpact();
-                                    Fluttertoast.showToast(
-                                        msg: 'Boton de ingresar presionado');
+                                    //TODO recuperar info.
+
+                                    await service.authenticate(Authentication(
+                                        dni: 34404216, password: "1234"));
+
+                                    Navigator.pushReplacementNamed(
+                                        context, 'checking');
+                                    //Fluttertoast.showToast(
+                                    //    msg: 'Boton de ingresar presionado');
                                   },
                                 ),
                                 SizedBox(width: size.width / 20),
