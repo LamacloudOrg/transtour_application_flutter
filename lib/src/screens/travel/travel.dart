@@ -2,22 +2,31 @@ import 'package:flutter/material.dart';
 import 'package:transtour_application/src/widget/forms/custom_input_field.dart';
 
 class Travel extends StatefulWidget {
+  Travel({Key? key}) : super(key: key);
+
   @override
-  _TravelState createState() => _TravelState();
+  State<Travel> createState() => _TravelState();
 }
 
 class _TravelState extends State<Travel> {
+  int _selectedIndex = 0;
+
+  void _onItemTapped(int index) {
+    Navigator.pushNamed(context, "signature");
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        // automaticallyImplyLeading: true, // remove back button in appbar.
+        leading: BackButton(color: Colors.white),
         backgroundColor: Colors.cyan,
         centerTitle: true,
         title: Text(
           'VIAJE ACTUAL',
           style: TextStyle(color: Colors.white, fontSize: 22),
         ),
-        automaticallyImplyLeading: false, // remove back button in appbar.
       ),
       body: Container(
         color: Colors.white70,
@@ -86,14 +95,15 @@ class _TravelState extends State<Travel> {
         selectedItemColor: Colors.white,
         backgroundColor: Color.fromRGBO(55, 57, 84, 1),
         unselectedItemColor: Colors.white,
-        currentIndex: 0,
-        items: [
+        currentIndex: _selectedIndex,
+        items: const [
           BottomNavigationBarItem(
               icon: Icon(Icons.play_arrow), label: 'INICIAR VIAJE'),
           BottomNavigationBarItem(
               icon: Icon(Icons.stop), label: 'FINALIZAR VIAJE'),
           BottomNavigationBarItem(icon: Icon(Icons.create), label: 'FIRMAR'),
         ],
+        onTap: _onItemTapped,
       ),
     );
   }
